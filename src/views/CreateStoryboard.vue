@@ -52,7 +52,6 @@ export default {
             this.saveStoryboard()
         },
         insertScene(position) {
-            // Réorganiser les numéros de scènes
             this.storyboard.scenes.forEach(scene => {
                 if (scene.number >= position) {
                     scene.number++
@@ -68,7 +67,6 @@ export default {
                 comments: []
             }
 
-            // Insérer la nouvelle scène à la position correcte
             this.storyboard.scenes.splice(position - 1, 0, newScene)
             this.currentSceneNumber = position
             this.saveStoryboard()
@@ -77,7 +75,6 @@ export default {
             if (this.storyboard.scenes.length > 1) {
                 this.storyboard.scenes = this.storyboard.scenes.filter(scene => scene.number !== sceneNumber)
 
-                // Renumérotation automatique
                 this.storyboard.scenes.forEach((scene, index) => {
                     scene.number = index + 1
                 })
@@ -109,8 +106,9 @@ export default {
             <div>
                 <p>{{ storyboard.description }}</p>
             </div>
-            <div class="format-info"> <i
-                    :class="{ 'bi-rectangle': storyboard.format === '16:9', 'bi-tv': storyboard.format === '4:3', 'bi-square': storyboard.format === '1:1', 'bi-phone': storyboard.format === '9:16', }"></i>
+            <div class="format-info">
+                <span
+                    :class="{ 'aspect-ratio-16x9': storyboard.format === '16:9', 'aspect-ratio-4x3': storyboard.format === '4:3', 'aspect-ratio-1x1': storyboard.format === '1:1', 'aspect-ratio-9x16': storyboard.format === '9:16', }"></span>
                 {{ storyboard.format }}
             </div>
         </div>
@@ -160,9 +158,12 @@ export default {
 }
 
 .editor-header .format-info {
-    display: inline-block;
+    border-left: 5px solid var(--dark);
+    display: flex;
+    align-items: center;
     height: 100%;
     padding: 1rem;
+    gap: .5rem;
 }
 
 .editor-layout {
@@ -178,5 +179,30 @@ export default {
 
 .sidebar {
     grid-column: span 5;
+}
+
+.aspect-ratio-1x1,
+.aspect-ratio-4x3,
+.aspect-ratio-9x16,
+.aspect-ratio-16x9 {
+    border: 3px solid #000;
+    border-radius: 5px;
+    padding: .4rem;
+}
+
+.aspect-ratio-16x9 {
+    aspect-ratio: 16/9;
+}
+
+.aspect-ratio-9x16 {
+    aspect-ratio: 9/16;
+}
+
+.aspect-ratio-4x3 {
+    aspect-ratio: 4/3;
+}
+
+.aspect-ratio-1x1 {
+    aspect-ratio: 1/1;
 }
 </style>
