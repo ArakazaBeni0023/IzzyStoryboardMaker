@@ -1,0 +1,58 @@
+/* display flex */
+.header-bar,
+.brand-logo,
+.cards-main-container,
+.cards-container,
+.fav,
+.category-container,
+.question,
+.card-marker-btns,
+.cancel,
+.check,
+.navbar,
+.nav-buttons,
+.place {
+    display: flex;
+}
+
+/* align items center */
+.header-bar,
+.brand-logo,
+.cards-main-container,
+/* .cards-container, */
+.category-container,
+.question,
+.fav,
+.cancel,
+.check,
+.navbar,
+.nav-buttons,
+.place {
+    align-items: center;
+}
+
+/* justify content center*/
+.cards-main-container,
+.cards-container,
+.category-container,
+.question,
+.fav,
+.cancel,
+.check,
+.place {
+    justify-content: center;
+}
+
+/*  justify content  space between; */
+.nav-buttons,
+.card-marker-btns {
+    justify-content: space-between;
+}
+
+/*  flex direction column */
+.cards-main-container
+/* ,
+.cards-container  */
+{
+    flex-direction: column;
+}

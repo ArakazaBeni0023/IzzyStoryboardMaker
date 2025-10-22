@@ -1,0 +1,36 @@
+:root {
+    --dark: #0A0A0A;
+    --aurore: #FFBDBD;
+    --aurore-lw: #f67fa759;
+    --light: #f8f8f8;
+    --white: #fff;
+    --gray: #ccc;
+    --sucess: #C4FFBD;
+    --succes-lw: #7ff69d59;
+    --danger: #FF0034;
+    --danger-bg: #ff003332;
+    --blue: #3498db;
+    --blue-bg: #3498db59;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: .6rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #0a0a0a1a;
+    margin: 2px;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0a0a0a3b;
+    transition: background .5s ease;
+    border-radius: 50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0a0a0add;
+}
