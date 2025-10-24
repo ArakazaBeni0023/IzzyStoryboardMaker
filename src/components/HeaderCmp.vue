@@ -57,24 +57,25 @@ export default {
 }
 
 .nav-link {
-    color: white;
+    color: var(--dark);
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.5s ease;
     font-weight: 500;
     border: 1px solid transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .nav-link.router-link-active {
-    background-color: #3498db;
-    color: white;
-    border-color: #3498db;
+    background-color: var(--dark);
+    color: var(--white);
 }
 
 /* Responsive */

@@ -24,10 +24,10 @@ export default {
         <div class="card-header">
             <h4>Scène {{ scene.number }}</h4>
             <div class="movement-indicators">
-                <div v-if="scene.cameraMovements.length > 0" class="bi-camera-reels-fill camera-indicator"></div>
-                <div v-if="scene.actorMovements.length > 0" class="bi-person-fill actor-indicator"></div>
-                <div v-if="scene.comments && scene.comments.length > 0"
-                    class="bi-chat-left-text-fill comment-indicator"></div>
+                <div v-if="scene.cameraMovements.length > 0" class="bi-camera-reels camera-indicator"></div>
+                <div v-if="scene.actorMovements.length > 0" class="bi-person actor-indicator"></div>
+                <div v-if="scene.comments && scene.comments.length > 0" class="bi-chat-left-text comment-indicator">
+                </div>
             </div>
         </div>
 
@@ -145,8 +145,7 @@ export default {
     font-size: 0.8rem;
     color: #5a6c7d;
     line-height: 1.4;
-    border-top: 3px solid var(--dark);
-    border-bottom: 1px solid var(--dark);
+    border-block: 3px solid var(--dark);
     min-height: 3.5rem;
 }
 
@@ -161,20 +160,21 @@ export default {
 }
 
 .movement-tag {
-    padding: 0.2rem 0.5rem;
+    padding: 0.3rem 0.5rem;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 500;
 }
 
 .movement-tag.camera {
-    background: #d6eaf8;
-    color: #2874a6;
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid #000;
 }
 
 .movement-tag.more {
-    background: #f8f9fa;
-    color: #6c757d;
-    border: 1px solid #dee2e6;
+    background: var(--light);
+    color: var(--gray-2);
+    border: 1px solid var(--gray-2);
 }
 </style>

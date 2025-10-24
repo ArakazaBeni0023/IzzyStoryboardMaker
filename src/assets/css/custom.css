@@ -72,6 +72,12 @@ body {
     color: var(--white);
 }
 
+.btn-cancel:hover {
+    background: var(--gray);
+    color: var(--dark);
+    border-color: var(--gray);
+}
+
 .check-box-input {
     display: flex;
     align-items: center;

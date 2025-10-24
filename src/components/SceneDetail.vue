@@ -1,3 +1,24 @@
+<script>
+export default {
+    name: 'SceneDetail',
+    props: {
+        scene: {
+            type: Object,
+            required: true
+        },
+        format: {
+            type: String,
+            default: '16:9'
+        }
+    },
+    computed: {
+        formatClass() {
+            return `format-${this.format.replace(':', '-')}`
+        }
+    }
+}
+</script>
+
 <template>
     <div class="scene-detail">
         <div class="detail-header">
@@ -52,27 +73,6 @@
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    name: 'SceneDetail',
-    props: {
-        scene: {
-            type: Object,
-            required: true
-        },
-        format: {
-            type: String,
-            default: '16:9'
-        }
-    },
-    computed: {
-        formatClass() {
-            return `format-${this.format.replace(':', '-')}`
-        }
-    }
-}
-</script>
 
 <style scoped>
 .scene-detail {

@@ -192,18 +192,18 @@ export default {
 }
 
 .bi-trash {
-    color: var(--danger);
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     width: 30px;
     height: 30px;
     text-align: center;
     transition: all .5s ease;
+    border: 3px solid var(--gray);
 }
 
 .bi-trash:hover {
-    background: var(--danger-bg);
+    background-color: var(--dark);
+    color: var(--white);
 }
 
 .editor-grid {
@@ -337,7 +337,7 @@ export default {
     background: var(--light);
     border-radius: 50px;
     cursor: pointer;
-    border: 1px solid #00000000;
+    border: 1px solid var(--dark);
     transition: all .5s ease;
 }
 

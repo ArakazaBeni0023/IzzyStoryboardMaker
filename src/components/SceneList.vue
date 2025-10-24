@@ -62,12 +62,14 @@ export default {
 
         <div v-if="showInsertDialog" class="modal">
             <div class="modal-content">
-                <h4>Insérer une scène</h4>
-                <label>Numéro de la scène :</label>
-                <input type="number" v-model="insertSceneNumber" min="1" :max="scenes.length + 1">
+                <h3>Insérer une scène</h3>
+                <div class="form-group">
+                    <label>Numéro de la scène :</label>
+                    <input type="number" v-model="insertSceneNumber" min="1" :max="scenes.length + 1">
+                </div>
                 <div class="modal-actions">
-                    <button @click="insertScene" class="btn-primary">Insérer</button>
-                    <button @click="showInsertDialog = false" class="btn-secondary">Annuler</button>
+                    <button @click="insertScene" class="btn btn-one">Insérer</button>
+                    <button @click="showInsertDialog = false" class="btn btn-cancel">Annuler</button>
                 </div>
             </div>
         </div>
@@ -88,7 +90,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    height: 51px;
+    height: 56px;
 }
 
 .scene-thumbnails {
@@ -178,10 +180,14 @@ export default {
 }
 
 .modal-content {
-    background: white;
+    background: var(--white);
     padding: 2rem;
-    border-radius: 8px;
     min-width: 300px;
+    border: 5px solid #000;
+}
+
+.modal-content h3 {
+    margin-bottom: 1rem;
 }
 
 .modal-actions {

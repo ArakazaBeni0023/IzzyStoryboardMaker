@@ -5,6 +5,7 @@
     --light: #f8f8f8;
     --white: #fff;
     --gray: #ccc;
+    --gray-2: #aaa;
     --sucess: #C4FFBD;
     --succes-lw: #7ff69d59;
     --danger: #FF0034;
@@ -25,10 +26,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0a0a0a3b;
+    background: #0a0a0ac6;
     transition: background .5s ease;
     border-radius: 50px;
-
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         handleStoryboardCreation(storyboard) {
-            localStorage.setItem('currentStoryboard', JSON.stringify(storyboard))
+            localStorage.setItem('izzy.currentStoryboard', JSON.stringify(storyboard))
             this.$router.push('/editor')
         },
         newStoryboard() {
@@ -27,7 +27,7 @@ export default {
 <template>
     <div class="home">
         <div class="top-title">
-            <h1>CRÉER VOTRE STORYBOARD</h1>
+            <h2>CRÉER VOTRE STORYBOARD</h2>
             <button v-if="allStories === true" class="bi-plus-lg" @click="newStoryboard()"></button>
         </div>
         <AllStoryboards v-if="allStories" />
@@ -41,10 +41,9 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 80px;
-    margin-bottom: 1.5rem;
 }
 
-.top-title h1 {
+.top-title h2 {
     font-family: "Poppins";
     font-weight: bold;
 }

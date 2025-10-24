@@ -25,11 +25,11 @@ export default {
         }
     },
     mounted() {
-        const saved = localStorage.getItem('currentStoryboard')
+        const saved = localStorage.getItem('izzy.currentStoryboard')
         if (saved) {
             this.storyboard = JSON.parse(saved)
             if (this.storyboard.scenes.length === 0) {
-                this.addScene()
+                this.addScene();
             }
         }
     },
@@ -91,7 +91,7 @@ export default {
             }
         },
         saveStoryboard() {
-            localStorage.setItem('currentStoryboard', JSON.stringify(this.storyboard))
+            localStorage.setItem('izzy.currentStoryboard', JSON.stringify(this.storyboard))
         }
     }
 }
@@ -108,7 +108,7 @@ export default {
             </div>
             <div class="format-info">
                 <span
-                    :class="{ 'aspect-ratio-16x9': storyboard.format === '16:9', 'aspect-ratio-4x3': storyboard.format === '4:3', 'aspect-ratio-1x1': storyboard.format === '1:1', 'aspect-ratio-9x16': storyboard.format === '9:16', }"></span>
+                    :class="{ 'format-16-9': storyboard.format === '16:9', 'format-4-3': storyboard.format === '4:3', 'format-1-1': storyboard.format === '1:1', 'format-9-16': storyboard.format === '9:16', }"></span>
                 {{ storyboard.format }}
             </div>
         </div>
@@ -181,28 +181,28 @@ export default {
     grid-column: span 5;
 }
 
-.aspect-ratio-1x1,
-.aspect-ratio-4x3,
-.aspect-ratio-9x16,
-.aspect-ratio-16x9 {
+.format-1-1,
+.format-4-3,
+.format-9-16,
+.format-16-9 {
     border: 3px solid #000;
     border-radius: 5px;
     padding: .4rem;
 }
 
-.aspect-ratio-16x9 {
-    aspect-ratio: 16/9;
+.format-16-9 {
+    aspect-ratio: 16 / 9;
 }
 
-.aspect-ratio-9x16 {
-    aspect-ratio: 9/16;
+.format-4-3 {
+    aspect-ratio: 4 / 3;
 }
 
-.aspect-ratio-4x3 {
-    aspect-ratio: 4/3;
+.format-1-1 {
+    aspect-ratio: 1 / 1;
 }
 
-.aspect-ratio-1x1 {
-    aspect-ratio: 1/1;
+.format-9-16 {
+    aspect-ratio: 9 / 16;
 }
 </style>

@@ -2,20 +2,40 @@
 export default {
     data() {
         return {
-            films: 3
+            allStoryboards: [],
         }
-    }
+    },
+    /* mounted() {
+        const films = localStorage.getItem('izzy.currentStoryboard')
+        this.allStoryboards = JSON.parse(films)
+        console.log(this.allStoryboards);
+    },
+    methods: {
+        viewStoryboard(index) {
+            const i = index;
+            this.storyboard.push(i);
+            localStorage.setItem('izzy.currentStoryboard', JSON.stringify(this.storyboard))
+        }
+    } */
+
 }
 </script>
 
 <template>
-    <div class="film-container">
-        <div class="film" v-for="f in films" :key="f">
-            <div class="cover"></div>
+    <div class="film-container" v-if="allStoryboards.length">
+        <div class="film" v-for="(storyboard, index) in allStoryboards" :key="storyboard"
+            @click="viewStoryboard(index)">
+            <div class="cover">
+                <!-- <img :src="storyboard.scenes[0].image" alt=""> -->
+            </div>
             <div class="nom-film">
-                <b>Nom de film</b>
+                <b>{{ storyboard.name }}</b>
             </div>
         </div>
+    </div>
+    <div class="empty" v-else>
+        <i class="bi-box-empty"></i>
+        <p>Maintenant, c'est vide!</p>
     </div>
 </template>
 

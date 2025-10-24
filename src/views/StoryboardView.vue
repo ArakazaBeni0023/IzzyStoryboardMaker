@@ -41,19 +41,19 @@ export default {
     },
     methods: {
         loadStoryboard() {
-            const saved = localStorage.getItem('currentStoryboard')
+            const saved = localStorage.getItem('izzy.currentStoryboard')
             if (saved) {
                 this.storyboard = JSON.parse(saved)
             }
         },
         loadGroups() {
-            const savedGroups = localStorage.getItem('storyboardGroups')
+            const savedGroups = localStorage.getItem('izzy.StoryboardGroups')
             if (savedGroups) {
                 this.sceneGroups = JSON.parse(savedGroups)
             }
         },
         saveGroups() {
-            localStorage.setItem('storyboardGroups', JSON.stringify(this.sceneGroups))
+            localStorage.setItem('izzy.StoryboardGroups', JSON.stringify(this.sceneGroups))
         },
         toggleGroupView() {
             this.groupView = !this.groupView
@@ -423,13 +423,6 @@ export default {
 .modal-actions {
     display: flex;
     gap: 1rem;
-}
-
-
-.btn-cancel:hover {
-    background: var(--gray);
-    color: var(--dark);
-    border-color: var(--gray);
 }
 
 /* Modal scène */
