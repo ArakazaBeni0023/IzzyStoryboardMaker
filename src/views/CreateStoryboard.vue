@@ -12,11 +12,17 @@ export default {
         return {
             storyboard: {
                 name: '',
-                description: '',
+                theme: '',
+                synopsis: '',
                 format: '16:9',
                 scenes: []
             },
             currentSceneNumber: 1
+        }
+    },
+    watch: {
+        'storyboard.theme'(newTheme) {
+            document.documentElement.style.setProperty('--current-theme', `var(--${newTheme})`);
         }
     },
     computed: {
@@ -25,12 +31,21 @@ export default {
         }
     },
     mounted() {
-        const saved = localStorage.getItem('izzy.currentStoryboard')
-        if (saved) {
-            this.storyboard = JSON.parse(saved)
+        try {
+            const saved = localStorage.getItem('izzy.currentStoryboard');
+            if (!saved) return this.$router.push('/');
+
+            const parsed = JSON.parse(saved);
+            if (!parsed.name || !parsed.scenes) return this.$router.push('/');
+
+            this.storyboard = parsed;
+
             if (this.storyboard.scenes.length === 0) {
                 this.addScene();
             }
+        } catch (error) {
+            console.error("Erreur de chargement du storyboard:", error);
+            this.$router.push('/');
         }
     },
     methods: {
@@ -41,7 +56,7 @@ export default {
             const newSceneNumber = this.storyboard.scenes.length + 1
             const newScene = {
                 number: newSceneNumber,
-                description: '',
+                synopsis: '',
                 image: null,
                 cameraMovements: [],
                 actorMovements: [],
@@ -60,7 +75,7 @@ export default {
 
             const newScene = {
                 number: position,
-                description: '',
+                synopsis: '',
                 image: null,
                 cameraMovements: [],
                 actorMovements: [],
@@ -92,19 +107,19 @@ export default {
         },
         saveStoryboard() {
             localStorage.setItem('izzy.currentStoryboard', JSON.stringify(this.storyboard))
-        }
+        },
     }
 }
 </script>
 
 <template>
     <div class="storyboard-editor">
-        <div class="editor-header">
+        <div class="editor-header" :style="{ '--current-theme': `var(--${storyboard.theme})` }">
             <div class="name-film">
                 <h3>{{ storyboard.name }}</h3>
             </div>
             <div>
-                <p>{{ storyboard.description }}</p>
+                <p>{{ storyboard.synopsis }}</p>
             </div>
             <div class="format-info">
                 <span
@@ -142,7 +157,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--aurore);
+    background: var(--current-theme);
     text-align: center;
     border-bottom: 5px solid var(--dark);
 }

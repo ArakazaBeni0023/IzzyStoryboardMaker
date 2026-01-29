@@ -1,6 +1,7 @@
 <script>
 import AllStoryboards from '@/components/AllStoryboards.vue';
-import StoryboardForm from '../components/StoryboardForm.vue'
+import StoryboardForm from '../components/StoryboardForm.vue';
+
 export default {
     name: 'HomeView',
     components: {
@@ -9,31 +10,33 @@ export default {
     },
     data() {
         return {
-            allStories: true
-        }
+            allStories: true,
+            storyboards: []
+        };
+    },
+    mounted() {
+
     },
     methods: {
-        handleStoryboardCreation(storyboard) {
-            localStorage.setItem('izzy.currentStoryboard', JSON.stringify(storyboard))
-            this.$router.push('/editor')
-        },
         newStoryboard() {
             this.allStories = false;
         }
     }
-}
+};
 </script>
 
 <template>
     <div class="home">
         <div class="top-title">
             <h2>CRÉER VOTRE STORYBOARD</h2>
-            <button v-if="allStories === true" class="bi-plus-lg" @click="newStoryboard()"></button>
+            <button v-if="allStories" class="bi-plus-lg" @click="newStoryboard()"></button>
         </div>
-        <AllStoryboards v-if="allStories" />
-        <StoryboardForm v-else @storyboard-created="handleStoryboardCreation" />
+
+        <AllStoryboards v-if="allStories" :storyboards="storyboards" />
+        <StoryboardForm v-else />
     </div>
 </template>
+
 
 <style scoped>
 .top-title {
@@ -49,7 +52,7 @@ export default {
 }
 
 .top-title .bi-plus-lg {
-    background: var(--aurore);
+    background: var(--color-theme);
     border: 3px solid var(--dark);
     width: 50px;
     height: 50px;

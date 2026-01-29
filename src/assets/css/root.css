@@ -1,6 +1,12 @@
 :root {
     --dark: #0A0A0A;
+    --color-theme: #FFBDBD;
     --aurore: #FFBDBD;
+    --forest: #c4ffbd;
+    --ocean: #bdbfff;
+    --sky: #bdfffe;
+    --barby: #ffbdfc;
+    --sunset: #fffbbd;
     --aurore-lw: #f67fa759;
     --light: #f8f8f8;
     --white: #fff;

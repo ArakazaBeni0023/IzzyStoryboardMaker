@@ -145,6 +145,7 @@ export default {
                         <textarea v-model="newComment" rows="6" @keyup.enter="addComment"
                             placeholder="Ajouter un commentaire ..."></textarea>
                     </div>
+                    <span>Commentaires:</span>
                     <div v-for="comment in localScene.comments" :key="comment.id" class="comment">
                         {{ comment.text }}
                     </div>
@@ -204,6 +205,7 @@ export default {
 .bi-trash:hover {
     background-color: var(--dark);
     color: var(--white);
+    border-color: var(--dark);
 }
 
 .editor-grid {
@@ -353,13 +355,13 @@ export default {
 .comments-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .comment {
-    background: var(--light);
+    background: var(--white);
     padding: 0.5rem;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.2rem; */
     font-size: 12px;
     border-left: 3px solid #000;
 }

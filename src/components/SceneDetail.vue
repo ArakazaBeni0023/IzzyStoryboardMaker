@@ -80,7 +80,7 @@ export default {
 }
 
 .detail-header {
-    background: var(--aurore);
+    background: var(--current-theme);
     color: var(--dark);
     padding: 1.5rem;
     text-align: center;

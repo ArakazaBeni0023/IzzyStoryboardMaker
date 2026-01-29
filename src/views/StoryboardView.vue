@@ -12,7 +12,7 @@ export default {
         return {
             storyboard: {
                 name: '',
-                description: '',
+                synopsis: '',
                 format: '16:9',
                 scenes: []
             },
@@ -135,7 +135,15 @@ export default {
             a.click()
             document.body.removeChild(a)
             URL.revokeObjectURL(url)
+        },
+        finalizeStoryboard() {
+            const all = JSON.parse(localStorage.getItem('izzy.allStoryboards') || '[]');
+            const updated = [...all, this.storyboard];
+            localStorage.setItem('izzy.allStoryboards', JSON.stringify(updated));
+            localStorage.removeItem('izzy.currentStoryboard');
+            this.$router.push('/');
         }
+
     }
 }
 </script>
@@ -144,7 +152,7 @@ export default {
     <div class="storyboard-view">
         <div class="view-header">
             <h2>{{ storyboard.name }}</h2>
-            <p class="description">{{ storyboard.description }}
+            <p class="synopsis">{{ storyboard.synopsis }}
             </p>
             <div class="view-controls">
                 <button @click="toggleGroupView" class="btn">
@@ -156,9 +164,9 @@ export default {
                 <button @click="$router.push('/editor')" class="btn">
                     Retour à l'édition
                 </button>
+                <button class="btn-save" @click="finalizeStoryboard">Enregistrer</button>
             </div>
         </div>
-
         <!-- Vue par groupes -->
         <div v-if="groupView" class="groups-view">
             <div v-for="group in sceneGroups" :key="group.id" class="scene-group">
@@ -281,7 +289,7 @@ export default {
     margin-bottom: 0.5rem;
 }
 
-.description {
+.synopsis {
     color: #7f8c8d;
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
@@ -356,6 +364,17 @@ export default {
     border: 3px solid var(--dark);
 }
 
+
+.btn-save {
+    background: var(--current-theme);
+    padding: 0 1rem;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    transform: scale(.97);
+}
 
 /* Vue détaillée */
 .detailed-view {
@@ -457,7 +476,7 @@ export default {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: var(--aurore);
+    background: var(--current-theme);
     color: var(--dark);
     border: none;
     width: 40px;

@@ -39,7 +39,6 @@ export default {
   overflow: auto;
 }
 
-
 @media (max-width: 768px) {
   .main {
     padding: 1rem;

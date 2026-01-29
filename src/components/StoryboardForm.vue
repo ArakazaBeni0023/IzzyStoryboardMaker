@@ -4,43 +4,88 @@ export default {
     data() {
         return {
             filmName: '',
-            description: '',
-            selectedFormat: '16:9'
+            synopsis: '',
+            cover: '',
+            selectedFormat: '16:9',
+            theme: 'aurore',
+            availableThemes: ['aurore', 'forest', 'ocean', 'sky', 'barby', 'sunset'],
+            allStoryboards: []
+        };
+    },
+    computed: {
+        wordCount() {
+            return this.synopsis.trim().split(/\s+/).filter(Boolean).length;
         }
     },
     methods: {
+        handleCoverUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.cover = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
         createStoryboard() {
             const storyboard = {
                 name: this.filmName,
-                description: this.description,
+                synopsis: this.synopsis,
                 format: this.selectedFormat,
+                theme: this.theme,
+                cover: this.cover,
                 scenes: [],
                 createdAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('izzy.currentStoryboard', JSON.stringify(storyboard));
+            // this.allStoryboards.push(storyboard);
+            // localStorage.setItem('izzy.allStoryboards', JSON.stringify(this.allStoryboards));
+            this.$router.push('/editor');
+        },
+        limitWords() {
+            const words = this.synopsis.trim().split(/\s+/);
+            if (words.length > 250) {
+                this.synopsis = words.slice(0, 250).join(' ');
             }
-            this.$emit('storyboard-created', storyboard)
         }
+
     }
-}
+};
 </script>
 
 <template>
     <div class="storyboard-form">
         <form @submit.prevent="createStoryboard">
+            <!-- Couverture -->
+            <div class="form-group">
+                <label for="cover" :class="{ 'bd-btm': cover === '' }"> <i class="bi-camera"></i> Image de
+                    couverture</label>
+                <input type="file" id="cover" accept="image/*" @change="handleCoverUpload" />
+                <div v-if="cover" class="preview">
+                    <img :src="cover" alt="Aperçu de la couverture" />
+                </div>
+            </div>
+
+            <!-- Nom -->
             <div class="form-group">
                 <label for="filmName">Nom du film</label>
-                <input type="text" id="filmName" v-model="filmName" required placeholder="Entrez le nom du film">
+                <input type="text" id="filmName" v-model="filmName" required placeholder="Entrez le nom du film" />
             </div>
 
+            <!-- synopsis -->
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" v-model="description" maxlength="250"
-                    placeholder="Description (max 250 mots)" rows="4"></textarea>
-                <div class="char-count">{{ description.length }}/250</div>
+                <label for="synopsis">Synopsis</label>
+                <textarea v-model="synopsis" @input="limitWords" rows="4"
+                    placeholder="Synopsis (max 250 mots)"></textarea>
+                <div class="char-count">{{ wordCount }}/250</div>
             </div>
 
+            <!-- Format -->
             <div class="form-group">
                 <label for="format">Format</label>
-                <select id="format" v-model="selectedFormat">
+                <select v-model="selectedFormat">
                     <option value="16:9">16:9 (Cinéma)</option>
                     <option value="4:3">4:3 (TV)</option>
                     <option value="1:1">1:1 (Carré)</option>
@@ -48,10 +93,20 @@ export default {
                 </select>
             </div>
 
+            <!-- Thème -->
+            <div class="form-group">
+                <label for="theme">Thème couleur</label>
+                <select v-model="theme">
+                    <option v-for="color in availableThemes" :key="color" :value="color">{{ color }}</option>
+                </select>
+            </div>
+
             <button type="submit" class="btn-primary">Commencer</button>
         </form>
     </div>
 </template>
+
+
 
 <style scoped>
 .storyboard-form {
@@ -64,6 +119,14 @@ export default {
     flex-direction: column;
     gap: 1rem;
     text-transform: uppercase;
+}
+
+.bd-btm {
+    border-bottom: 3px solid var(--dark);
+}
+
+input[type="file"] {
+    display: none;
 }
 
 .char-count {

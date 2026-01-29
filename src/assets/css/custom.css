@@ -11,9 +11,13 @@ button {
 
 body {
     font-family: "Consolas";
-    background: var(--white);
+    background: var(--light);
     color: var(--dark);
 
+}
+
+input {
+    font-family: "Consolas";
 }
 
 .form-group {
@@ -39,12 +43,24 @@ body {
     width: 100%;
     padding: 0.75rem;
     font-size: 12px;
+    background: var(--light);
     border: 3px solid var(--dark);
 
 }
 
 .form-group textarea {
     resize: vertical;
+}
+
+.preview {
+    border: 3px solid #000;
+    /* border-top: none; */
+    height: 300px;
+    width: fit-content;
+}
+
+.preview img {
+    height: 100%;
 }
 
 .btn {
